@@ -12,17 +12,12 @@ use Rex::Ext::ParamLookup;
 
 # The prepare task needs root privileges. Run as root.
 task prepare => make {
-  if (Rex::Config::get_user() ne 'root') {
-    Rex::Logger::info "Please set rex user as root for this task (rex -u root)", 'error';
-    return;
-  }
-
-  my $os = get_operating_system;
+  my $os = lc get_operating_system;
   unless ($os eq 'debian' or $os eq 'ubuntu') {
     Rex::Logger::info "Only Debian and Ubuntu have been tested for this package", 'error';
     return;
   }
-  
+
   my $relay_host = param_lookup "postfix_relay_host", 'mail';
 
   my $version = run q!dpkg-query -W -f='${Status} ${Version}\n' postfix!;
