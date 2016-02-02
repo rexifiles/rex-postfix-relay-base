@@ -1,0 +1,6 @@
+Name: Rex::Postfix::Relay::Base
+Description: Base module to install Postfix as a mail relay
+Author: Paul Williams <kwakwa@cpan.org>
+License: Apache 2.0
+Require:
+  - Rex::Ext::ParamLookup
